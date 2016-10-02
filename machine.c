@@ -115,7 +115,7 @@ void machine_run(machine m, char *instructions) {
  * Description: the instruction for the beginning of a loop
  */
 static bool execute_start(machine m) {
-	//TODO: Write loop code for start
+	loop_stack_push(m->stack, m->instruction_pointer);
 	return true;
 }
 
@@ -124,7 +124,10 @@ static bool execute_start(machine m) {
  * Description: the instruction for the end of a loop
  */
 static bool execute_end(machine m) {
-	//TODO: Write loop code for end
+	if (memory_get(m->mem) == 0)
+		loop_stack_pop(m->stack);
+	else
+		m->instruction_pointer = loop_stack_peek(m->stack);
 	return true;
 }
 
