@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <string.h>
+
+#include "loop_stack.h"
 
 char *read_file();
 void interpret_program();
 
 int main(int argc, char *argv[]) {
-	FILE *input;
-
 	if (argc > 1)
 		printf("Please run Cheso programs with standard input");
 	else
@@ -19,7 +17,19 @@ int main(int argc, char *argv[]) {
 
 void interpret_program() {
 	char *code = read_file();
-	printf("Program text: %s", code);
+	printf("Program text: %s \n", code);
+
+	loop_stack stack = loop_stack_new();
+	loop_stack_push(stack, 10);
+
+	int value = loop_stack_pop(stack);
+	printf("Loop stack value: %d\n", value);
+
+	value = loop_stack_pop(stack);
+	printf("Loop stack value: %d\n", value);
+
+	loop_stack_free(stack);
+
 	free(code);
 }
 
