@@ -7,15 +7,15 @@ This is not the first time I have attempted to make my own programming language.
 
 ## Instructions
 
-* Loops - s/e
-* Inc/Dec Register - u/d
-* Shift Registers - l/r
-* Print ascii character - p
-* Take character input - i
+* Start/end a loop - s/e
+* Increment/decrement the current register - u/d
+* Shift left or right one register - l/r
+* Print the ASCII character in the current register - p
+* Place a character taken as input in the current register - i
 
 ## Using the Language
 
-To compile the interpreter use the provided Makefile by running `make` in the directory with the source files. Then run a .cheso program file with the command: `./cheso < program.cheso`
+To compile the interpreter use the provided Makefile by running the `make` command in the directory with the source files. Then run a .cheso program file with the command: `./cheso program.cheso`
 
 ## Example Cheso Code
 
