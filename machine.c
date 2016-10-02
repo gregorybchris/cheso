@@ -18,14 +18,14 @@ struct machine {
 	memory mem;
 };
 
-static void execute_start(machine m);
-static void execute_end(machine m);
-static void execute_left(machine m);
-static void execute_right(machine m);
-static void execute_up(machine m);
-static void execute_down(machine m);
-static void execute_print(machine m);
-static void execute_input(machine m);
+static bool execute_start(machine m);
+static bool execute_end(machine m);
+static bool execute_left(machine m);
+static bool execute_right(machine m);
+static bool execute_up(machine m);
+static bool execute_down(machine m);
+static bool execute_print(machine m);
+static bool execute_input(machine m);
 
 /*
  * Function: machine_new
@@ -62,30 +62,31 @@ void machine_free(machine m) {
 void machine_run(machine m, char *instructions) {
 	while (true) {
 		char instruction = instructions[m->instruction_pointer];
+		bool result = true;
 		switch (instruction) {
 			case 's':
-			execute_start(m);
+			result = execute_start(m);
 			break;
 			case 'e':
-			execute_end(m);
+			result = execute_end(m);
 			break;
 			case 'u':
-			execute_up(m);
+			result = execute_up(m);
 			break;
 			case 'd':
-			execute_down(m);
+			result = execute_down(m);
 			break;
 			case 'l':
-			execute_left(m);
+			result = execute_left(m);
 			break;
 			case 'r':
-			execute_right(m);
+			result = execute_right(m);
 			break;
 			case 'p':
-			execute_print(m);
+			result = execute_print(m);
 			break;
 			case 'i':
-			execute_input(m);
+			result = execute_input(m);
 			break;
 			case ' ':
 			break;
@@ -98,6 +99,10 @@ void machine_run(machine m, char *instructions) {
 			exit(1);
 			break;
 		}
+		if (!result) {
+			fprintf(stderr, "\tError executing instruction at index: %d", m->instruction_pointer);
+			exit(1);
+		}
 
 		m->instruction_pointer++;
 		if (instructions[m->instruction_pointer] == '\0')
@@ -109,48 +114,50 @@ void machine_run(machine m, char *instructions) {
  * Function: execute_start
  * Description: the instruction for the beginning of a loop
  */
-static void execute_start(machine m) {
-
+static bool execute_start(machine m) {
+	//TODO: Write loop code for start
+	return true;
 }
 
 /*
  * Function: execute_end
  * Description: the instruction for the end of a loop
  */
-static void execute_end(machine m) {
-
+static bool execute_end(machine m) {
+	//TODO: Write loop code for end
+	return true;
 }
 
 /*
  * Function: execute_left
  * Description: the instruction for shifting left one register
  */
-static void execute_left(machine m) {
-	memory_shift_left(m->mem);
+static bool execute_left(machine m) {
+	return memory_shift_left(m->mem);
 }
 
 /*
  * Function: execute_right
  * Description: the instruction for shifting right one register
  */
-static void execute_right(machine m) {
-	memory_shift_right(m->mem);
+static bool execute_right(machine m) {
+	return memory_shift_right(m->mem);
 }
 
 /*
  * Function: execute_up
  * Description: the instruction for incrementing the current register
  */
-static void execute_up(machine m) {
-	memory_increment(m->mem);
+static bool execute_up(machine m) {
+	return memory_increment(m->mem);
 }
 
 /*
  * Function: execute_up
  * Description: the instruction for decrementing the current register
  */
-static void execute_down(machine m) {
-	memory_decrement(m->mem);
+static bool execute_down(machine m) {
+	return memory_decrement(m->mem);
 }
 
 /*
@@ -158,9 +165,10 @@ static void execute_down(machine m) {
  * Description: the instruction for printing the ascii character
  *    corresponding to the value in the current register
  */
-static void execute_print(machine m) {
-	printf("%d", memory_get(m->mem));
-	//TODO: Make this print ASCII
+static bool execute_print(machine m) {
+	char character = (char)memory_get(m->mem);
+	printf("%c", character);
+	return true;
 }
 
 /*
@@ -168,8 +176,13 @@ static void execute_print(machine m) {
  * Description: the instruction for setting the value in the current
  *     register to the next character from the standard input buffer
  */
-static void execute_input(machine m) {
-	//TODO: Input
+static bool execute_input(machine m) {
+	return memory_set(m->mem, getchar());
+	return true;
 }
+
+
+
+
 
 

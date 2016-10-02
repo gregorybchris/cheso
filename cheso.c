@@ -20,31 +20,35 @@ void start_machine();
  * Description: main method, checks for input types and starts the cheso machine
  */
 int main(int argc, char *argv[]) {
-	if (argc > 1)
-		printf("Please run Cheso programs with standard input");
-	else
-		start_machine();
+	if (argc < 2)
+		printf("Please run Cheso on a .cheso program file");
+	else if (argc > 2)
+		printf("Cheso runs on one .cheso program file");
+	else {
+		FILE *program_file = fopen(argv[1], "r");
+		char *instructions = read_instructions(program_file);
+		start_machine(instructions);
+		free(instructions);
+	}
 
 	return 0;
 }
 
 /*
  * Function: start_machine
- * Description: creates a cheso machine, gets instructions, and starts execution
+ * Description: creates a cheso machine and starts execution on the given instructions
  */
-void start_machine(void) {
-	char *instructions = read_instructions();
+void start_machine(char *instructions) {
 	machine m = machine_new();
 	machine_run(m, instructions);
 	machine_free(m);
-	free(instructions);
 }
 
 /*
  * Function: read_instructions
- * Description: reads instructions from standard input and saves them in a buffer
+ * Description: reads instructions from a file
  */
-char *read_instructions(void) {
+char *read_instructions(FILE *program_file) {
 	int code_capacity = 10;
 	char *code = malloc(code_capacity);
 	if (code == NULL) {
@@ -54,7 +58,7 @@ char *read_instructions(void) {
 
 	int c;
 	int code_size = 0;
-	while ((c = getchar()) != EOF) {
+	while ((c = (char)fgetc(program_file)) != EOF) {
 		// If the buffer has run out
 		if (code_size >= code_capacity - 1) {
 			code_capacity *= 2;

@@ -1,5 +1,5 @@
 # Cheso
-Esoteric programming language by Chris
+Esoteric programming language by Chris (Pronounced CHAY-so)
 
 ## Description
 

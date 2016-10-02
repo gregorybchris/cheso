@@ -11,7 +11,7 @@
 #define INITIAL_CAPACITY 5
 
 struct loop_stack {
-	int* data;
+	int *data;
 	int size;
 	int capacity;
 };
