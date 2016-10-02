@@ -44,8 +44,6 @@ void machine_free(machine m) {
 }
 
 void machine_run(machine m, char *instructions) {
-	printf("Program text: %s \n", instructions);
-	
 	while (true) {
 		char instruction = instructions[m->instruction_pointer];
 		switch (instruction) {
@@ -93,11 +91,11 @@ void execute_end(machine m) {
 }
 
 void execute_left(machine m) {
-
+	memory_shift_left(m->mem);
 }
 
 void execute_right(machine m) {
-
+	memory_shift_right(m->mem);
 }
 
 void execute_up(machine m) {
@@ -110,10 +108,11 @@ void execute_down(machine m) {
 
 void execute_print(machine m) {
 	printf("%d", memory_get(m->mem));
+	//TODO: Make this print ASCII
 }
 
 void execute_input(machine m) {
-
+	//TODO: Input
 }
 
 

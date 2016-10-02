@@ -69,7 +69,7 @@ void memory_decrement(memory mem) {
  * Description: shifts the current cell pointer to the right
  */
 void memory_shift_right(memory mem) {
-	//TODO: Handle shift up
+	//TODO: Handle shift right
 }
 
 /*
@@ -77,5 +77,5 @@ void memory_shift_right(memory mem) {
  * Description: shifts the current cell pointer to the left
  */
 void memory_shift_left(memory mem) {
-	//TODO: Handle shift down
+	//TODO: Handle shift left
 }
