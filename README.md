@@ -17,6 +17,6 @@ This is not the first time I have attempted to make my own programming language.
 
 To compile the interpreter use the provided Makefile by running `make` in the directory with the source files. Then run a .cheso program file with the command: `./cheso < program.cheso`
 
-## Example Code
+## Example Cheso Code
 
-`uuuup` > `4`
+`uuuuuuuuuuuuuuusruruuuruuuuruuuuuruuuuuuruuruuuuuuuruuuuuuuullllllllderrrrdddprrrddddpuuuuuuuppuuupluuprddddddpuuuuuprddddpddpldddddddddprddpluuuupdddddplprrpuupdddpluuupruuuplddddddprdddddppluuuupruuuuupllup` > `Hello intrepid programmer!`

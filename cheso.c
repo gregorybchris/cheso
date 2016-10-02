@@ -12,10 +12,13 @@
 /*                                                                         */
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
-
 char *read_instructions();
 void start_machine();
 
+/*
+ * Function: main
+ * Description: main method, checks for input types and starts the cheso machine
+ */
 int main(int argc, char *argv[]) {
 	if (argc > 1)
 		printf("Please run Cheso programs with standard input");
@@ -25,6 +28,10 @@ int main(int argc, char *argv[]) {
 	return 0;
 }
 
+/*
+ * Function: start_machine
+ * Description: creates a cheso machine, gets instructions, and starts execution
+ */
 void start_machine(void) {
 	char *instructions = read_instructions();
 	machine m = machine_new();
@@ -33,6 +40,10 @@ void start_machine(void) {
 	free(instructions);
 }
 
+/*
+ * Function: read_instructions
+ * Description: reads instructions from standard input and saves them in a buffer
+ */
 char *read_instructions(void) {
 	int code_capacity = 10;
 	char *code = malloc(code_capacity);
