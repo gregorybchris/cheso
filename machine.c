@@ -2,6 +2,14 @@
 #include "memory.h"
 #include "loop_stack.h"
 
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+/*                                 machine                                 */
+/*                                                                         */
+/*      This is the file that handles the instruction loop and handles     */
+/*   managing control based on the actual instructions in the input file.  */
+/*                                                                         */
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
 #define INITIAL_CAPACITY 5
 
 struct machine {
@@ -10,20 +18,20 @@ struct machine {
 	memory mem;
 };
 
-void execute_start(machine m);
-void execute_end(machine m);
-void execute_left(machine m);
-void execute_right(machine m);
-void execute_up(machine m);
-void execute_down(machine m);
-void execute_print(machine m);
-void execute_input(machine m);
+static void execute_start(machine m);
+static void execute_end(machine m);
+static void execute_left(machine m);
+static void execute_right(machine m);
+static void execute_up(machine m);
+static void execute_down(machine m);
+static void execute_print(machine m);
+static void execute_input(machine m);
 
 /*
- * Function: memory_new
- * Description: constructor for a register memory
+ * Function: machine_new
+ * Description: constructor for a cheso machine
  */
-machine machine_new() {
+machine machine_new(void) {
 	machine m = malloc(sizeof(struct machine));
 	if (m == NULL) {
 		fprintf(stderr, "ERROR: Out of memory\n");
@@ -37,12 +45,20 @@ machine machine_new() {
 	return m;
 }
 
+/*
+ * Function: machine_free
+ * Description: destructor for a cheso machine
+ */
 void machine_free(machine m) {
 	memory_free(m->mem);
 	loop_stack_free(m->stack);
 	free(m);
 }
 
+/*
+ * Function: machine_run
+ * Description: starts the cheso machine fetch-decode-execute cycle
+ */
 void machine_run(machine m, char *instructions) {
 	while (true) {
 		char instruction = instructions[m->instruction_pointer];
@@ -71,8 +87,15 @@ void machine_run(machine m, char *instructions) {
 			case 'i':
 			execute_input(m);
 			break;
+			case ' ':
+			break;
+			case '\t':
+			break;
+			case '\n':
+			break;
 			default:
-			fprintf(stderr, "Uknown instruction: %c in program", instruction);
+			fprintf(stderr, "Unknown instruction: %c in program\n", instruction);
+			exit(1);
 			break;
 		}
 
@@ -82,36 +105,70 @@ void machine_run(machine m, char *instructions) {
 	}
 }
 
-void execute_start(machine m) {
+/*
+ * Function: execute_start
+ * Description: the instruction for the beginning of a loop
+ */
+static void execute_start(machine m) {
 
 }
 
-void execute_end(machine m) {
+/*
+ * Function: execute_end
+ * Description: the instruction for the end of a loop
+ */
+static void execute_end(machine m) {
 
 }
 
-void execute_left(machine m) {
+/*
+ * Function: execute_left
+ * Description: the instruction for shifting left one register
+ */
+static void execute_left(machine m) {
 	memory_shift_left(m->mem);
 }
 
-void execute_right(machine m) {
+/*
+ * Function: execute_right
+ * Description: the instruction for shifting right one register
+ */
+static void execute_right(machine m) {
 	memory_shift_right(m->mem);
 }
 
-void execute_up(machine m) {
+/*
+ * Function: execute_up
+ * Description: the instruction for incrementing the current register
+ */
+static void execute_up(machine m) {
 	memory_increment(m->mem);
 }
 
-void execute_down(machine m) {
+/*
+ * Function: execute_up
+ * Description: the instruction for decrementing the current register
+ */
+static void execute_down(machine m) {
 	memory_decrement(m->mem);
 }
 
-void execute_print(machine m) {
+/*
+ * Function: execute_up
+ * Description: the instruction for printing the ascii character
+ *    corresponding to the value in the current register
+ */
+static void execute_print(machine m) {
 	printf("%d", memory_get(m->mem));
 	//TODO: Make this print ASCII
 }
 
-void execute_input(machine m) {
+/*
+ * Function: execute_up
+ * Description: the instruction for setting the value in the current
+ *     register to the next character from the standard input buffer
+ */
+static void execute_input(machine m) {
 	//TODO: Input
 }
 

@@ -1,5 +1,14 @@
 #include "memory.h"
 
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+/*                                  memory                                 */
+/*                                                                         */
+/*      This file handles the program memory and specifically keeps track  */
+/*   of the registers that the program can use, the values in those        */
+/*   registers, and the current register being worked on in the program.   */
+/*                                                                         */
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
 #define INITIAL_CAPACITY 5
 
 struct memory {
@@ -13,7 +22,7 @@ struct memory {
  * Function: memory_new
  * Description: constructor for a register memory
  */
-memory memory_new() {
+memory memory_new(void) {
 	memory mem = malloc(sizeof(struct memory));
 	if (mem == NULL) {
 		fprintf(stderr, "ERROR: Out of memory\n");

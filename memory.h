@@ -6,7 +6,7 @@
 
 typedef struct memory *memory;
 
-memory memory_new();
+memory memory_new(void);
 void memory_free(memory mem);
 int memory_get(memory mem);
 void memory_increment(memory mem);

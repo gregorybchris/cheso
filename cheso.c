@@ -3,6 +3,16 @@
 
 #include "machine.h"
 
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+/*                                   cheso                                 */
+/*                                                                         */
+/*     This is the main file that starts execution of a cheso program.     */
+/*   It starts the execution loop and iterprets the code in the file       */
+/*   piped in as input to standard in.                                     */
+/*                                                                         */
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+
 char *read_instructions();
 void start_machine();
 
@@ -15,7 +25,7 @@ int main(int argc, char *argv[]) {
 	return 0;
 }
 
-void start_machine() {
+void start_machine(void) {
 	char *instructions = read_instructions();
 	machine m = machine_new();
 	machine_run(m, instructions);
@@ -23,7 +33,7 @@ void start_machine() {
 	free(instructions);
 }
 
-char *read_instructions() {
+char *read_instructions(void) {
 	int code_capacity = 10;
 	char *code = malloc(code_capacity);
 	if (code == NULL) {

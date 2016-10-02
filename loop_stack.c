@@ -1,5 +1,13 @@
 #include "loop_stack.h"
 
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+/*                                loop_stack                               */
+/*                                                                         */
+/*      This is an implementation of a stack used to keep track of the     */
+/*   execution of loops in a cheso program.                                */
+/*                                                                         */
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
 #define INITIAL_CAPACITY 5
 
 struct loop_stack {
@@ -12,7 +20,7 @@ struct loop_stack {
  * Function: loop_stack_new
  * Description: constructor for a stack that holds positions of loops in a Cheso program
  */
-loop_stack loop_stack_new() {
+loop_stack loop_stack_new(void) {
 	loop_stack stack = malloc(sizeof(struct loop_stack));
 	if (stack == NULL) {
 		fprintf(stderr, "ERROR: Out of memory\n");

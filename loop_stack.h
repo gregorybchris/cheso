@@ -7,7 +7,7 @@
 
 typedef struct loop_stack *loop_stack;
 
-loop_stack loop_stack_new();
+loop_stack loop_stack_new(void);
 void loop_stack_free(loop_stack stack);
 int loop_stack_pop(loop_stack stack);
 void loop_stack_push(loop_stack stack, int position);
