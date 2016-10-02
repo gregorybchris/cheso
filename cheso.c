@@ -1,39 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "loop_stack.h"
+#include "machine.h"
 
-char *read_file();
-void interpret_program();
+char *read_instructions();
+void start_machine();
 
 int main(int argc, char *argv[]) {
 	if (argc > 1)
 		printf("Please run Cheso programs with standard input");
 	else
-		interpret_program();
+		start_machine();
 
 	return 0;
 }
 
-void interpret_program() {
-	char *code = read_file();
-	printf("Program text: %s \n", code);
-
-	loop_stack stack = loop_stack_new();
-	loop_stack_push(stack, 10);
-
-	int value = loop_stack_pop(stack);
-	printf("Loop stack value: %d\n", value);
-
-	value = loop_stack_pop(stack);
-	printf("Loop stack value: %d\n", value);
-
-	loop_stack_free(stack);
-
-	free(code);
+void start_machine() {
+	char *instructions = read_instructions();
+	machine m = machine_new();
+	machine_run(m, instructions);
+	machine_free(m);
+	free(instructions);
 }
 
-char *read_file() {
+char *read_instructions() {
 	int code_capacity = 10;
 	char *code = malloc(code_capacity);
 	if (code == NULL) {
