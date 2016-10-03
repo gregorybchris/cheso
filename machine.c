@@ -170,7 +170,7 @@ static bool execute_down(machine m) {
  */
 static bool execute_print(machine m) {
 	char character = (char)memory_get(m->mem);
-	printf("%c", character);
+	putchar(character);
 	return true;
 }
 
