@@ -25,37 +25,40 @@ A Cheso program is a string of instructions. Each instruction is one character a
 
 ### Example Cheso Code
 
-The following code will output `Hello intrepid programmer!`
+The following code will output `I <3 chips and Cheso`
 
 ```bash
 uuuuuuuuuuuuuuu
 s
-ruruuuruuuuruuuuuruuuuuuruuruuuuuuuruuuuuuuu
+ru
+ruuu
+ruuuu
+ruuuuu
+ruuuuuu
+ruu
+ruuuuuuu
+ruuuuuuuu
 lllllllld
 e
 
-rrrrdddp
-rrrddddp
-uuuuuuupp
-uuup
-luup
+rrrrddp
+rruup
+lllp
+luuuuuup
+rrrrp
 rddddddp
 uuuuup
-rddddp
-ddp
-ldddddddddp
-rddp
-luuuup
-dddddp
+up
+uuuuuuup
+uuup
 lp
-rrp
-uup
+luuuuuuup
+rrdddddp
+lluuup
+rp
+llddddddp
+ruuuup
 dddp
-luuup
-ruuup
-lddddddp
-rdddddpp
-luuuup
-ruuuuup
-llup
+rruuuuup
+ddddp
 ```
